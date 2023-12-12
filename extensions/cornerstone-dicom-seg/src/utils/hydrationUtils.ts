@@ -1,3 +1,4 @@
+import { Viewport } from './../../../../platform/core/src/types/HangingProtocol';
 import { Enums, cache } from '@cornerstonejs/core';
 
 /**
@@ -56,7 +57,7 @@ async function updateViewportsForSegmentationRendering({
   updatedViewports.forEach(async viewport => {
     viewport.viewportOptions = {
       ...viewport.viewportOptions,
-      viewportType: 'volume',
+      viewportType: viewport.viewportOptions?.viewportType ?? 'volume',
       needsRerendering: true,
     };
     const viewportId = viewport.viewportId;
@@ -174,7 +175,7 @@ function getUpdatedViewportsForSegmentation({
         viewportId,
         displaySetInstanceUIDs: viewport.displaySetInstanceUIDs,
         viewportOptions: {
-          viewportType: 'volume',
+          viewportType: viewport.viewportOptions?.ViewportType ?? 'volume',
           needsRerendering: true,
         },
       });
